@@ -4,8 +4,8 @@ using Unroll.@unroll
 const INNERLOOPBOUND = 2
 
 function tu1_plain(n)
-    a = Array{Int,1}()
-    b = Array{Int,1}()
+    a = Int[]
+    b = Int[]
     for i = 1 : n
         push!(a, i)
         push!(b, 2*i)
@@ -24,8 +24,8 @@ function tu1_plain(n)
 end
 
 function tu1_handunroll(n)
-    a = Array{Int,1}()
-    b = Array{Int,1}()
+    a = Int[]
+    b = Int[]
     for i = 1 : n
         push!(a, i)
         push!(b, 2*i)
@@ -43,8 +43,8 @@ function tu1_handunroll(n)
 end
 
 function tu1_macrounroll(n)
-    a = Array{Int,1}()
-    b = Array{Int,1}()
+    a = Int[]
+    b = Int[]
     for i = 1 : n
         push!(a, i)
         push!(b, 2*i)
@@ -65,8 +65,8 @@ end
 
 
 function tu2_plain(n)
-    a = Array{Int,1}()
-    b = Array{Int,1}()
+    a = Int[]
+    b = Int[]
     for i = 1 : n
         push!(a, i)
         push!(b, 2*i)
@@ -87,8 +87,8 @@ function tu2_plain(n)
 end
 
 function tu2_handunroll(n)
-    a = Array{Int,1}()
-    b = Array{Int,1}()
+    a = Int[]
+    b = Int[]
     for i = 1 : n
         push!(a, i)
         push!(b, 2*i)
@@ -108,8 +108,8 @@ function tu2_handunroll(n)
 end
 
 function tu2_macrounroll(n)
-    a = Array{Int,1}()
-    b = Array{Int,1}()
+    a = Int[]
+    b = Int[]
     for i = 1 : n
         push!(a, i)
         push!(b, 2*i)
@@ -131,8 +131,8 @@ end
 
 
 function tu3_plain(n)
-    a = Array{Int,1}()
-    b = Array{Int,1}()
+    a = Int[]
+    b = Int[]
     for i = 1 : n
         push!(a, i)
         push!(b, 2*i)
@@ -156,8 +156,8 @@ end
 
 
 function tu3_handunroll(n)
-    a = Array{Int,1}()
-    b = Array{Int,1}()
+    a = Int[]
+    b = Int[]
     for i = 1 : n
         push!(a, i)
         push!(b, 2*i)
@@ -176,8 +176,8 @@ end
 
 
 function tu3_macrounroll(n)
-    a = Array{Int,1}()
-    b = Array{Int,1}()
+    a = Int[]
+    b = Int[]
     for i = 1 : n
         push!(a, i)
         push!(b, 2*i)
