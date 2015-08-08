@@ -15,7 +15,8 @@ will macro-expand as::
    x += a[2]
 
 For this to be possible, the loop bounds must be known at the time
-of macro-expansion.  A common case is that they can be constant values as in
+of macro-expansion.  A common case is that they are literal
+constant values as in
 the above example.  
 The loop bounds may include symbolic constants that are global
 within the module::
@@ -41,7 +42,7 @@ the call::
       end
    end
 
-will be macro-expand to::
+will macro-expand to::
 
      a += b[1]
      a += 2*b[2]
