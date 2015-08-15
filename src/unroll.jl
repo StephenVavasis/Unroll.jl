@@ -47,6 +47,20 @@ macro unroll(expr)
     esc(ret)
 end
 
+macro tuplegen(expr)
+    if expr.head != :comprehension || length(expr.args) != 2 ||
+        expr.args[2].head != :(=) ||
+        typeof(expr.args[2].args[1]) != Symbol
+        error("Expression following tuplegen macro must be a comprehension as described in the documentation")
+    end
+    varname = expr.args[2].args[1]
+    ret = Expr(:tuple)
+    for k in eval(current_module(), expr.args[2].args[2])
+        e2 = copy_and_substitute_tree(expr.args[1], varname, k)
+        push!(ret.args,e2)
+    end
+    esc(ret)
+end
 
 export @unroll    
 

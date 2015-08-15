@@ -2,6 +2,7 @@
 Unroll macro
 ================
 
+This package provides the ``unroll`` and ``tuplegen`` macros.
 The ``unroll`` macro in Julia unrolls simple for-loops.  For example,
 the following code::
 
@@ -48,6 +49,20 @@ will macro-expand to::
      a += 2*b[2]
      a += b[3]
      a += 2*b[4]
+
+------------------
+The tuplegen macro
+------------------
+
+The ``tuplegen`` macro generates fixed-length tuples using comprehension-like
+syntax.  For example::
+
+       v = @tuplegen [(i==2)? i * 6 : i for i = 1 : 4]
+
+generates the tuple ``(1,12,3,4)``.  (Without the ``@tuplegen`` call, this
+same statement would generate the array ``[1,12,3,4]``.)  As with the ``@unroll``
+macro, the loop bounds must be known at macro-expansion time.
+
 
 -----------------
 Cautionary notes

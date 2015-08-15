@@ -1,6 +1,9 @@
 module test_unroll
 
 using Unroll.@unroll
+using Unroll.@tuplegen
+using Base.Test.@test
+
 const INNERLOOPBOUND = 2
 
 function tu1_plain(n)
@@ -199,31 +202,39 @@ function tu3_macrounroll(n)
     y
 end
 
+const TUPLELENGTH = 3
+
+function test_tuplegen()
+    v = @tuplegen [(i==2)? i * 6 : i for i = 1 : TUPLELENGTH]
+    @test isa(v, Tuple{Int,Int,Int})
+    @test v[1] == 1 && v[2] == 12 && v[3] == 3
+end
 
 
-
-
-
+test_tuplegen()
 println("TIMING TEST FOR SINGLE UNROLL")
 println("no unrolling:")
-@time tu1_plain(10000000)
+@time y1=tu1_plain(10000000)
 println("hand unrolled:")
-@time tu1_handunroll(10000000)
+@time y2=tu1_handunroll(10000000)
 println("unrolled by the macro")
-@time tu1_macrounroll(10000000)
+@time y3=tu1_macrounroll(10000000)
+@test y1==y2 && y2==y3
 println("TIMING TEST FOR NESTED UNROLL")
 println("no unrolling:")
-@time tu2_plain(10000000)
+@time z1=tu2_plain(10000000)
 println("hand unrolled:")
-@time tu2_handunroll(10000000)
+@time z2=tu2_handunroll(10000000)
 println("unrolled by the macro")
-@time tu2_macrounroll(10000000)
+@time z3=tu2_macrounroll(10000000)
+@test z1==z2 && z2==z3
 println("TIMING TEST FOR IF-ELSE UNROLL")
 println("no unrolling:")
-@time tu3_plain(10000000)
+@time w1=tu3_plain(10000000)
 println("hand unrolled:")
-@time tu3_handunroll(10000000)
+@time w2=tu3_handunroll(10000000)
 println("unrolled by the macro")
-@time tu3_macrounroll(10000000)
+@time w3=tu3_macrounroll(10000000)
+@test w1==w2 && w2==w3
 
 end
