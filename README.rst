@@ -99,6 +99,17 @@ works as expected::
 As with the ``@unroll``
 macro, the loop bounds for ``@tuplegen``
 must be known at macro-expansion time.
+In particular, the following plausible attempt to define a generic function for
+addition of arbitrary
+fixed-length tuples (so that ``(1,7)+(-2,3)`` yields ``(-1,10)``) does not work::
+
+  +{N}(a::NTuple{N}, b::NTuple{N}) = @tuplegen [a[i]+b[i] for i=1:N]
+
+because the type parameter ``N`` is not known at the time of macro expansion; instead
+it is determined later by the dispatch mechanism.  If someone knows how to fix
+this, please create an issue or pull request.  (It is possible to write generic
+addition for tuples via the more complicated generated-function mechanism.)
+
 
 
 -----------------
