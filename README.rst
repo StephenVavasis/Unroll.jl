@@ -75,6 +75,27 @@ statement::
 but this statement is less efficient because it creates a heap-allocated
 array as a temporary.
 
+Here is a more complicated example of ``@tuplegen``.  Suppose 2-by-2
+matrices are represented as 2-tuples of 2-tuples, e.g., ``((1,2),(5,7))``
+stands for::
+
+  1  2
+  5  7
+
+Then 2-by-2 matrix multiplication may be defined by::
+
+  mtxmult(a,b) = @tuplegen [@tuplegen [a[i][1]*b[1][j] + a[i][2]*b[2][j] 
+                                       for j = 1 : 2]
+                            for i = 1 : 2]
+
+This definition generates unrolls into four expressions on the right-hand side and
+works as expected::
+
+   julia> mtxmult(((1,2),(5,7)),((4,1),(2,8)))
+   ((8,17),(34,61))
+
+
+
 As with the ``@unroll``
 macro, the loop bounds for ``@tuplegen``
 must be known at macro-expansion time.
