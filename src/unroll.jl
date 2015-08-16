@@ -62,6 +62,7 @@ macro tuplegen(expr)
     esc(ret)
 end
 
-export @unroll    
+export @unroll
+export @tuplegen
 
 end
