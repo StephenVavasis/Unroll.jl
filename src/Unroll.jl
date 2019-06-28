@@ -4,7 +4,7 @@ module Unroll
 copy_and_substitute_tree(e, varname, newtext) = e
 
 copy_and_substitute_tree(e::Symbol, varname, newtext) = 
-    e == varname? newtext : e
+    e == varname ? newtext : e
 
 function copy_and_substitute_tree(e::Expr, varname, newtext)
     e2 = Expr(e.head)
@@ -14,7 +14,7 @@ function copy_and_substitute_tree(e::Expr, varname, newtext)
     if e.head == :if
         newe = e2
         try
-            u = eval(current_module(), e2.args[1])
+            u = Core.eval(@__MODULE__, e2.args[1])
             if u == true
                 newe = e2.args[2]
             elseif u == false
@@ -24,6 +24,7 @@ function copy_and_substitute_tree(e::Expr, varname, newtext)
                     newe = :nothing
                 end
             end
+        catch
         end
         e2 = newe
     end
@@ -40,7 +41,7 @@ macro unroll(expr)
     end
     varname = expr.args[1].args[1]
     ret = Expr(:block)
-    for k in eval(current_module(), expr.args[1].args[2])
+    for k in Core.eval(@__MODULE__, expr.args[1].args[2])
         e2 = copy_and_substitute_tree(expr.args[2], varname, k)
         push!(ret.args, e2)
     end
@@ -55,7 +56,7 @@ macro tuplegen(expr)
     end
     varname = expr.args[2].args[1]
     ret = Expr(:tuple)
-    for k in eval(current_module(), expr.args[2].args[2])
+    for k in Core.eval(@__MODULE__, expr.args[2].args[2])
         e2 = copy_and_substitute_tree(expr.args[1], varname, k)
         push!(ret.args,e2)
     end
