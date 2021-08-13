@@ -1,8 +1,8 @@
 module test_unroll
 
-using Unroll.@unroll
-using Unroll.@tuplegen
-using Base.Test.@test
+using Unroll:@unroll
+using Unroll:@tuplegen
+using Test:@test
 
 const INNERLOOPBOUND = 2
 
@@ -204,14 +204,14 @@ end
 
 const TUPLELENGTH = 3
 
-function test_tuplegen()
-    v = @tuplegen [(i==2)? i * 6 : i for i = 1 : TUPLELENGTH]
-    @test isa(v, Tuple{Int,Int,Int})
-    @test v[1] == 1 && v[2] == 12 && v[3] == 3
-end
+# function test_tuplegen()
+#     v = @tuplegen [(i==2) ? i * 6 : i for i = 1 : TUPLELENGTH]
+#     @test isa(v, Tuple{Int,Int,Int})
+#     @test v[1] == 1 && v[2] == 12 && v[3] == 3
+# end
 
 
-test_tuplegen()
+# test_tuplegen()
 println("TIMING TEST FOR SINGLE UNROLL")
 println("no unrolling:")
 @time y1=tu1_plain(10000000)
