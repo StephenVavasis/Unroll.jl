@@ -1,0 +1,10 @@
+name = "Unroll"
+uuid = "36e64239-2ab9-4580-84fb-56737a503d36"
+authors = ["Stephen Vavasis"]
+version = "0.1.0"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
