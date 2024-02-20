@@ -1,6 +1,6 @@
 # Unroll macro
 
-Might as well take a look at [`Base.@nexpr`](https://docs.julialang.org/en/v1/devdocs/cartesian/#Anonymous-function-expressions-as-macro-arguments), [`Unrolled.jl`](https://github.com/cstjean/Unrolled.jl) and [`KernalAbstractions.jl`](https://juliagpu.github.io/KernelAbstractions.jl/stable/extras/unrolling/)
+Might as well take a look at [`Base.@nexpr`](https://docs.julialang.org/en/v1/devdocs/cartesian/#Anonymous-function-expressions-as-macro-arguments), [`Unrolled.jl`](https://github.com/cstjean/Unrolled.jl) and [`KernalAbstractions.jl`](https://juliagpu.github.io/KernelAbstractions.jl/stable/extras/unrolling/).
 
 This package provides the `unroll` and `tuplegen` macros.
 The `unroll` macro in Julia unrolls simple for-loops.  For example,
